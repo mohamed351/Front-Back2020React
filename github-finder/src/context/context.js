@@ -17,13 +17,19 @@ export const GitHubProvider = ({children})=>{
     const [state,dispatch] = useReducer(gitHubReducer,initialState);
     
     const getUser = async (query) =>{
+        dispatch({
+            type:"LOADING"
+        });
         const api = await fetch(`https://api.github.com/search/users?q=${query}`)
         const data = await api.json();
         dispatch({
             type:"GET_USERS",
             payload:data.items
 
-        })
+        });
+        dispatch({
+            type:"DELETE_LOADING"
+        });
     }
     return (
         <gitHubContext.Provider value={{state, getUser}}>

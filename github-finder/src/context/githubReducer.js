@@ -7,6 +7,17 @@ export const gitHubReducer = (state,action)=>{
             users:action.payload,
             loading:false
           }
+         case "LOADING":
+          return {
+            ...state,
+            loading:true
+          }
+          case "DELETE_LOADING":
+            return {
+              ...state,
+              loading:false
+            }
+          
         default:
             return state;
     }
