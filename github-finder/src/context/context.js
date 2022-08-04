@@ -31,8 +31,36 @@ export const GitHubProvider = ({children})=>{
             type:"DELETE_LOADING"
         });
     }
+
+    const getcurrentUser = async (loginName)=>{
+        dispatch({
+            type:"LOADING"
+        });
+        const api = await fetch(`https://api.github.com/users/${loginName}`);
+        if(api.status === 404){
+
+        }
+        const data = await api.json();
+        
+        const repoapi = await fetch(`https://api.github.com/users/${loginName}/repos`)
+        const repoData = await repoapi.json();
+        dispatch({
+            type:"GET_USER_LOGIN",
+            payload:{
+                user:data,
+                repos:repoData
+            }
+        });
+        dispatch({
+            type:"DELETE_LOADING"
+        });
+
+        
+
+
+    }
     return (
-        <gitHubContext.Provider value={{state, getUser}}>
+        <gitHubContext.Provider value={{...state, getUser, getcurrentUser }}>
             {children}
         </gitHubContext.Provider>
     )

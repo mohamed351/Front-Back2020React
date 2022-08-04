@@ -17,6 +17,12 @@ export const gitHubReducer = (state,action)=>{
               ...state,
               loading:false
             }
+          case "GET_USER_LOGIN":
+            return{
+              ...state,
+              user:action.payload.user,
+              repos:action.payload.repos
+            }
           
         default:
             return state;

@@ -6,13 +6,13 @@ import UserItem from "./UserItem";
 
 function UserList() {
   const value =  useContext(gitHubContext);
-  if(value.state.loading){
+  if(value.loading){
     return <Spinner />;
   }
   return (
     <div className='grid grid-cols-3'>
      
-        {value.state.users.map(user => <UserItem key={user.login} user={user}></UserItem>)}
+        {value.users.map(user => <UserItem key={user.login} user={user}></UserItem>)}
     </div>
   )
 }
