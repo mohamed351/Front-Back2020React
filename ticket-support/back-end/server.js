@@ -1,5 +1,6 @@
 const express = require("express");
 const errorMiddleware = require("./middlewares/errorMiddleware");
+const auth = require("./middlewares/authMiddleware");
 require("dotenv").config();
 const app = express();
 const {connectDB} = require("./config/db");
@@ -12,6 +13,9 @@ app.use(express.urlencoded({extended:false}));
 connectDB();
 
 app.use("/api/users",userRouter);
+app.get("/me",auth,(req,res)=>{
+    res.json("me");
+});
 
 app.use(errorMiddleware);
 
