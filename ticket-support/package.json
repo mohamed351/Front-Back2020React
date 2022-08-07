@@ -1,0 +1,22 @@
+{
+  "name": "ticket-support",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node back-end/server.js",
+    "serve": "nodemon  back-end/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.1"
+   
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
