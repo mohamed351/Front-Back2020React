@@ -13,12 +13,15 @@ function App() {
    <Router>
 
    <Navbar title={"Ticket Support"} />
+   <div className='container mt-3'>
    <Routes>
     <Route path='/' element={<Home />} />
     <Route path='/register' element={ <Register />} />
     <Route path='/login' element={<Login/>} />
    </Routes>
+   </div>
    </Router>
+
    </>
   );
 }
