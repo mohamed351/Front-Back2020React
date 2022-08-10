@@ -13,10 +13,10 @@ export const register = createAsyncThunk("auth/register",async(user, thunkApi)=>
 
 const initialState ={
     user:null,
-    isError: false,
+    isError: true,
     isSuccess:false,
     isLoading:false,
-    message: ""
+    message: "Hello World"
 }
 
 const authSlice = createSlice({
@@ -51,4 +51,9 @@ const authSlice = createSlice({
     }
 })
 
+export const  actions ={
+   ...authSlice.actions,
+   register
+   
+}
 export default authSlice.reducer;

@@ -4,7 +4,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const registerController =expressAsync( async (req,res)=>{
+    console.log(req.body);
    const {name,password,email}  =  req.body;
+   
    if(!name || !password || !email){
       res.status(400);
       throw new Error("The Data is missing");

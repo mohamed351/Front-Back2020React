@@ -1,6 +1,25 @@
-import React, {useState} from 'react'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import React, {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {actions} from "../../features/auth/authSlice";
 function Register() {
+    const {isError,isLoading,isSuccess,message, user} = useSelector(a=> a.auth);
+    const navigate = useNavigate();
+    const dispath = useDispatch();
+    useEffect(()=>{
+   
+        if(isError){
+            toast.error(message);  
+        }
+
+        if(user  || isSuccess){
+            navigate("/");
+        }
+        dispath(actions.reset());
+
+    },[isError,isLoading,message,isSuccess,user, navigate,dispath])
 
     const [getForm,setForm] =useState({
         name:"",
@@ -19,9 +38,10 @@ function Register() {
 
         });
     }
-    const onFormSubmit =(e) =>{
+    const onFormSubmit = async (e) =>{
         e.preventDefault();
         console.log(getForm);
+        dispath(actions.register(getForm));
      
     }
     
@@ -51,9 +71,9 @@ function Register() {
             <label>Confirm Password</label>
                 <input type="password" required value={getForm.password2 }  onChange={onChange} className='form-control' placeholder='Confirm Password' name='password2' />
             </div>
-        
-            <button type='submit' className='btn btn-primary mt-2 w-100'> Register</button>
-
+            {isLoading ?  "Loading" :    <button type='submit' className='btn btn-primary mt-2 w-100'> Register</button>}
+         
+            <ToastContainer />
         </form>
     </>
   )
